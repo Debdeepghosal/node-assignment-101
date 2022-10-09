@@ -1,5 +1,6 @@
 const express=require("express");
 const app=express();
+const cors = require('cors');
 const passport=require("passport");
 const LocalStrategy=require('passport-local').Strategy;
 const port=process.env.PORT || 3000;
@@ -9,7 +10,10 @@ require('dotenv').config();
 const connectDB = require('./db/connect'); 
 const User = require('./models/usermodel')
 const session=require("express-session");  
+
+
 //Middlewares
+app.use(cors());
 app.use(session({secret: 'secret',
      resave: true,
     saveUninitialized: true}));
@@ -37,6 +41,8 @@ passport.use(new LocalStrategy(
       });
     }
   ));
+
+
 //serialization
 passport.serializeUser((user,done)=>{
     if(user){
@@ -44,6 +50,8 @@ passport.serializeUser((user,done)=>{
     }
     return done(null,false)
 });
+
+
 //deserialization
 passport.deserializeUser((id,done)=>{
     User.findById(id,(err,user)=>{
@@ -51,6 +59,8 @@ passport.deserializeUser((id,done)=>{
         return done(null,user)
     })
 })
+
+
 //middleware to check authentication
 function authenticated(req,res,done){
     if(req.user){
@@ -58,6 +68,9 @@ function authenticated(req,res,done){
     }
     return res.json({message:"log in first"})  
 }
+
+
+
 //Registration route
 app.post("/api/v1/registration",(req,res,done)=>{
 
@@ -85,14 +98,21 @@ app.post("/api/v1/registration",(req,res,done)=>{
 app.get("/",(req,res)=>{
     res.json("Node Assignment");
 })
+
+
+
 //login route
 app.post("/api/v1/login",passport.authenticate('local'),function(req,res){
     console.log(req.user);
     res.json({message:"Logged in successfully"})
 });
 
+
+
 //Task router
 app.use("/api/v1/task",authenticated,taskRouter);
+
+
 
 //Starting server
 const start=async()=>{
