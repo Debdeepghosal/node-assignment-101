@@ -12,6 +12,13 @@ const User = require('./models/usermodel')
 const session=require("express-session");  
 
 
+//Swagger
+
+const swaggerUI=require("swagger-ui-express");
+const YAML=require("yamljs");
+const swaggerDocument=YAML.load("./swagger.yaml");
+
+
 //Middlewares
 app.use(cors());
 app.use(session({secret: 'secret',
@@ -88,10 +95,12 @@ app.post("/api/v1/registration",(req,res,done)=>{
 );
 //Home route
 app.get("/",(req,res)=>{
-    res.json("Node Assignment");
+    res.json("<h1>Node Assignment</h1><a href='/docs'>Swagger Documentation</a>");
 })
 
+//swagger docs route
 
+app.use("/docs",swaggerUI.serve,swaggerUI.setup(swaggerDocument));
 
 //login route
 app.post("/api/v1/login",passport.authenticate('local'),function(req,res){

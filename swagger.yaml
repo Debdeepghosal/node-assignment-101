@@ -1,0 +1,221 @@
+openapi: 3.0.0
+info:
+  title: node_assignment
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://node-assignment-101.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /task:
+    post:
+      tags:
+      - Task
+      summary: createTask
+      operationId: createTask
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/createTaskRequest'
+              - example:
+                  key: 5
+                  task: do homework
+            example:
+              key: 5
+              task: do homework
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Task
+      summary: getTask
+      operationId: getTask
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /task/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The task ID
+    delete:
+      tags:
+      - Task
+      summary: deleteTask
+      operationId: deleteTask
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Task
+      summary: getTaskfromId
+      operationId: getTaskfromId
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+    patch:
+      tags:
+      - Task
+      summary: updateTask
+      operationId: updateTask
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/updateTaskRequest'
+              - example:
+                  key: 3
+                  task: go to acropolis mall
+            example:
+              key: 3
+              task: go to acropolis mall
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /login:
+    post:
+      tags:
+      - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/loginrequest'
+              - example:
+                  username: raj man
+                  password: asdfgh
+            example:
+              username: raj man
+              password: asdfgh
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /registration:
+    post:
+      tags:
+      - Auth
+      summary: registration
+      operationId: registration
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/registrationrequest'
+              - example:
+                  username: raj man
+                  password: asdfgh
+            example:
+              username: raj man
+              password: asdfgh
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  schemas:
+    createTaskRequest:
+      title: createTaskRequest
+      required:
+      - key
+      - task
+      type: object
+      properties:
+        key:
+          type: integer
+          format: int32
+        task:
+          type: string
+      example:
+        key: 5
+        task: do homework
+    loginrequest:
+      title: loginrequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: raj man
+        password: asdfgh
+    updateTaskRequest:
+      title: updateTaskRequest
+      required:
+      - key
+      - task
+      type: object
+      properties:
+        key:
+          type: integer
+          format: int32
+        task:
+          type: string
+      example:
+        key: 3
+        task: go to acropolis mall
+    registrationrequest:
+      title: registrationrequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: raj man
+        password: asdfgh
+tags:
+- name: Task
+  description: ''
+- name: Auth
+  description: ''

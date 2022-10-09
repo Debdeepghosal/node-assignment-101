@@ -18,6 +18,8 @@
     "mongoose": "^6.6.5",
     "nodemon": "^2.0.20",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0"
   }
 }
