@@ -61,14 +61,6 @@ passport.deserializeUser((id,done)=>{
 })
 
 
-//middleware to check authentication
-function authenticated(req,res,done){
-    if(req.user){
-        return done()
-    }
-    return res.json({message:"log in first"})  
-}
-
 
 
 //Registration route
@@ -110,7 +102,7 @@ app.post("/api/v1/login",passport.authenticate('local'),function(req,res){
 
 
 //Task router
-app.use("/api/v1/task",authenticated,taskRouter);
+app.use("/api/v1/task",taskRouter);
 
 
 
