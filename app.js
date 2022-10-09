@@ -95,7 +95,7 @@ app.post("/api/v1/registration",(req,res,done)=>{
 );
 //Home route
 app.get("/",(req,res)=>{
-    res.json("<h1>Node Assignment</h1><a href='/docs'>Swagger Documentation</a>");
+    res.send("<h1>Node Assignment</h1><a href='/docs'>Swagger Documentation</a>");
 })
 
 //swagger docs route
