@@ -81,6 +81,10 @@ app.post("/api/v1/registration",(req,res,done)=>{
         res.json({message:"Registration complete"})
     }
 );
+//Home route
+app.get("/",(req,res)=>{
+    res.json("Node Assignment");
+})
 //login route
 app.post("/api/v1/login",passport.authenticate('local'),function(req,res){
     console.log(req.user);
